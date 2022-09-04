@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using AutoMapper;
 using Library.Models.Dto;
@@ -15,9 +13,8 @@ namespace Library.Services
         private readonly IMapper _mapper;
 
         public BookService(
-                IBookRepository bookRepository,
-                IMapper mapper
-            )
+            IBookRepository bookRepository,
+            IMapper mapper)
         {
             _bookRepository = bookRepository;
             _mapper = mapper;
@@ -33,16 +30,7 @@ namespace Library.Services
             var bookToSave = bookDto.Id == null
                 ? new Book()
                 : await _bookRepository.GetAsync(bookDto.Id.Value);
-
-            _mapper.Map(bookDto, bookToSave,
-                opts =>
-                    opts.AfterMap((src, dest) =>
-                    {
-                        if (bookDto.Id != null)
-                        {
-                            dest.Id = bookDto.Id.Value;
-                        }
-                    }));
+            _mapper.Map(bookDto, bookToSave);
 
             var bookId = bookDto.Id == null
                 ? await _bookRepository.CreateAsync(bookToSave)
@@ -51,23 +39,26 @@ namespace Library.Services
             return bookId;
         }
 
-        public async Task<Guid> DeleteBook(BookDto bookDto)
+        public async Task<Guid> DeleteBook(Guid bookId)
         {
-            var bookId = Guid.NewGuid();
-            var book = _mapper.Map<BookDto>(await _bookRepository.GetAsync(bookId));
+            var bookToDelete = await _bookRepository.GetAsync(bookId);
+            bookToDelete.DeleteDateTime = DateTime.Now;
+
+            await _bookRepository.UpdateAsync(bookToDelete);
             await _bookRepository.SaveAsync();
+
             return bookId;
         }
 
         public async Task<BookDto[]> FindBooks(string bookName)
         {
-            var books = _mapper.Map<BookDto>(await _bookRepository.GetAllAsync());
+            var books = await _bookRepository.FindBooks(bookName);
             return _mapper.Map<BookDto[]>(books);
         }
 
         public async Task<BookDto[]> GetAllBooks()
         {
-            var books = _mapper.Map<BookDto>(await _bookRepository.GetAllAsync());
+            var books = await _bookRepository.GetAllAsync();
             return _mapper.Map<BookDto[]>(books);
         }
 
@@ -79,7 +70,7 @@ namespace Library.Services
 
         public async Task<BookDto[]> GetAvailableBooks()
         {
-            var books = _mapper.Map<BookDto>(await _bookRepository.GetAllAsync());
+            var books = await _bookRepository.GetAvailableBooks();
             return _mapper.Map<BookDto[]>(books);
         }
     }

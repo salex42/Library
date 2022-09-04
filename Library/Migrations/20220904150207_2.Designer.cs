@@ -3,15 +3,17 @@ using System;
 using Library.DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Library.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20220904150207_2")]
+    partial class _2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -152,23 +154,25 @@ namespace Library.Migrations
                         {
                             Id = new Guid("03f98c08-4df2-4d91-bec8-731820e85750"),
                             BookId = new Guid("d6b60b8e-3110-4009-bc3a-3aa046e76591"),
-                            GiveDateTime = new DateTime(2022, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GiveDateTime = new DateTime(2022, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ReaderId = new Guid("39f7f096-bb97-45ca-91d5-8b53bedc1d56"),
-                            TakeDateTime = new DateTime(2022, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            TakeDateTime = new DateTime(2022, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = new Guid("8b80c57f-327c-4702-85da-3bcdc31513b7"),
                             BookId = new Guid("9db23f42-f970-4493-96d4-f66ba27454a9"),
+                            GiveDateTime = new DateTime(2022, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ReaderId = new Guid("39f7f096-bb97-45ca-91d5-8b53bedc1d56"),
-                            TakeDateTime = new DateTime(2022, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            TakeDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = new Guid("89b9b80f-3ff2-42e7-89ae-36128d2c40b3"),
                             BookId = new Guid("0d601e61-1d35-4d5c-8f09-2c674e3d87ba"),
+                            GiveDateTime = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ReaderId = new Guid("d117ab3b-c26a-4175-8ef9-04943540f4c6"),
-                            TakeDateTime = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            TakeDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 

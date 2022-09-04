@@ -7,5 +7,9 @@ namespace Library.Repositories
     public interface IBookRepository : IBaseRepository<Book>
     {
         Task<Book[]> GetIssuedBooks();
+
+        Task<Book[]> GetAvailableBooks();
+
+        Task<Book[]> FindBooks(string searchTerm);
     }
 }

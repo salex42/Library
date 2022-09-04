@@ -11,7 +11,7 @@ namespace Library.Services
 
         Task<Guid> SaveBook(BookDto bookDto);
 
-        Task<Guid> DeleteBook(BookDto bookDto);
+        Task<Guid> DeleteBook(Guid bookId);
 
         Task<BookDto[]> FindBooks(string bookName);
 

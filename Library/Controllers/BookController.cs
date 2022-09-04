@@ -38,12 +38,12 @@ namespace Library.Controllers
         /// <summary>
         /// Удаление книги
         /// </summary>
-        /// <param name="bookDto"></param>
+        /// <param name="bookId"></param>
         /// <returns></returns>
         [HttpPost(nameof(DeleteBook))]
-        public async Task<Guid> DeleteBook([FromBody] BookDto bookDto)
+        public async Task<Guid> DeleteBook([FromBody] Guid bookId)
         {
-            return await _bookService.DeleteBook(bookDto);
+            return await _bookService.DeleteBook(bookId);
         }
 
         [HttpGet(nameof(FindBooks))]
