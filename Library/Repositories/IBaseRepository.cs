@@ -7,14 +7,16 @@ namespace Library.Repositories
 {
     public interface IBaseRepository<TDbModel> where TDbModel : IEntity
     {
-        public Task<List<TDbModel>> GetAll();
+        public Task<List<TDbModel>> GetAllAsync();
 
-        public Task<TDbModel> Get(Guid id);
+        public Task<TDbModel> GetAsync(Guid id);
 
-        public Task<TDbModel> Create(TDbModel model);
+        public Task<Guid> CreateAsync(TDbModel model);
 
-        public Task<TDbModel> Update(TDbModel model);
+        public Task<Guid> UpdateAsync(TDbModel model);
 
-        public Task Delete(Guid id);
+        public Task DeleteAsync(Guid id);
+
+        public Task SaveAsync();
     }
 }

@@ -18,7 +18,7 @@ namespace Library.Controllers
             _bookService = bookService;
         }
 
-        [HttpGet]
+        [HttpGet(nameof(GetBook))]
         public async Task<BookDto> GetBook([FromQuery] Guid bookId)
         {
             return await _bookService.GetById(bookId);
@@ -29,7 +29,7 @@ namespace Library.Controllers
         /// </summary>
         /// <param name="bookDto"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost(nameof(SaveBook))]
         public async Task<Guid> SaveBook([FromBody] BookDto bookDto)
         {
             return await _bookService.SaveBook(bookDto);
@@ -40,19 +40,19 @@ namespace Library.Controllers
         /// </summary>
         /// <param name="bookDto"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost(nameof(DeleteBook))]
         public async Task<Guid> DeleteBook([FromBody] BookDto bookDto)
         {
             return await _bookService.DeleteBook(bookDto);
         }
 
-        [HttpGet]
+        [HttpGet(nameof(FindBooks))]
         public async Task<BookDto[]> FindBooks([FromQuery] string bookName)
         {
             return await _bookService.FindBooks(bookName);
         }
 
-        [HttpGet]
+        [HttpGet(nameof(GetAllBooks))]
         public async Task<BookDto[]> GetAllBooks()
         {
             return await _bookService.GetAllBooks();
@@ -62,7 +62,7 @@ namespace Library.Controllers
         /// Выданные книги
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet(nameof(GetIssuedBooks))]
         public async Task<BookDto[]> GetIssuedBooks()
         {
             return await _bookService.GetIssuedBooks();
@@ -72,7 +72,7 @@ namespace Library.Controllers
         /// Доступные книги
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet(nameof(GetAvailableBooks))]
         public async Task<BookDto[]> GetAvailableBooks()
         {
             return await _bookService.GetAvailableBooks();

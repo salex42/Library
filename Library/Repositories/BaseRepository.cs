@@ -10,33 +10,31 @@ namespace Library.Repositories
 {
     public class BaseRepository<TDbModel> : IBaseRepository<TDbModel> where TDbModel : class, IEntity
     {
-        private ApplicationContext _context { get; set; }
+        protected ApplicationContext _context { get; set; }
 
         public BaseRepository(ApplicationContext context)
         {
             _context = context;
         }
 
-        public async Task<TDbModel> Create(TDbModel model)
+        public async Task<Guid> CreateAsync(TDbModel model)
         {
             _context.Set<TDbModel>().Add(model);
-            await _context.SaveChangesAsync();
-            return model;
+            return model.Id;
         }
 
-        public async Task Delete(Guid id)
+        public async Task DeleteAsync(Guid id)
         {
             var toDelete = _context.Set<TDbModel>().FirstOrDefault(m => m.Id == id);
             _context.Set<TDbModel>().Remove(toDelete);
-            await _context.SaveChangesAsync();
         }
 
-        public async Task<List<TDbModel>> GetAll()
+        public async Task<List<TDbModel>> GetAllAsync()
         {
             return _context.Set<TDbModel>().ToList();
         }
 
-        public async Task<TDbModel> Update(TDbModel model)
+        public async Task<Guid> UpdateAsync(TDbModel model)
         {
             var toUpdate = _context.Set<TDbModel>().FirstOrDefault(m => m.Id == model.Id);
             if (toUpdate != null)
@@ -44,13 +42,17 @@ namespace Library.Repositories
                 toUpdate = model;
             }
             _context.Update(toUpdate);
-            await _context.SaveChangesAsync();
-            return toUpdate;
+            return toUpdate.Id;
         }
 
-        public async Task<TDbModel> Get(Guid id)
+        public async Task<TDbModel> GetAsync(Guid id)
         {
             return await _context.Set<TDbModel>().FirstOrDefaultAsync(m => m.Id == id);
+        }
+
+        public async Task SaveAsync()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }

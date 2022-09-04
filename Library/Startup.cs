@@ -26,10 +26,9 @@ namespace Library
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string connection = Configuration.GetConnectionString("DefaultConnection");
+            string connection = Configuration.GetConnectionString("PostgreSqlConnection");
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(
@@ -41,7 +40,7 @@ namespace Library
                     });
             });
             services.AddControllers();
-            services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(connection));
             services.WithLibraryModule();
             services.AddSwaggerGen(c =>
             {
@@ -49,7 +48,6 @@ namespace Library
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

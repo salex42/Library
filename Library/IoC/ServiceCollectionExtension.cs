@@ -11,7 +11,7 @@ namespace Library.IoC
         {
             return serviceCollection
                     .AddScoped<IBookService, BookService>()
-                    .AddScoped<IBaseRepository<Book>, BaseRepository<Book>>()
+                    .AddScoped<IBookRepository, BookRepository>()
                     .AddAutoMapper(typeof(MappingProfile));
         }
     }
