@@ -4,7 +4,7 @@ using Library.Models.Library;
 
 namespace Library
 {
-    internal class MappingProfile : Profile
+    public class MappingProfile : Profile
     {
         public MappingProfile()
         {
