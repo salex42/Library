@@ -2,7 +2,6 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using AutoFixture;
-using AutoFixture.Kernel;
 using AutoMapper;
 using FluentAssertions;
 using Library;
