@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using AutoMapper;
 using Library.Models.Dto;
@@ -9,6 +10,8 @@ namespace Library.Services
 {
     public class BookService : IBookService
     {
+        public const string CountMessageError = "Количество книг не может быть меньше 0";
+        public const string YearMessageError = "Некорректный год изадния книги";
         private readonly IBookRepository _bookRepository;
         private readonly IMapper _mapper;
 
@@ -27,6 +30,16 @@ namespace Library.Services
 
         public async Task<Guid> SaveBook(BookDto bookDto)
         {
+            if (bookDto.Count < 0)
+            {
+                throw new ValidationException(CountMessageError);
+            }
+
+            if (bookDto.Year < 1000 || bookDto.Year > 2022)
+            {
+                throw new ValidationException(YearMessageError);
+            }
+
             var bookToSave = bookDto.Id == null
                 ? new Book()
                 : await _bookRepository.GetAsync(bookDto.Id.Value);
