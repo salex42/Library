@@ -2,7 +2,6 @@
 using System;
 using System.Threading.Tasks;
 using Library.Models.Dto;
-using Library.Models.Library;
 using Library.Services;
 
 namespace Library.Controllers
