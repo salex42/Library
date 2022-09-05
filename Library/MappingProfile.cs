@@ -10,6 +10,9 @@ namespace Library
         {
             CreateMap<Book, BookDto>();
             CreateMap<BookDto, Book>();
+
+            CreateMap<Reader, ReaderDto>();
+            CreateMap<ReaderDto, Reader>();
         }
     }
 }

@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using Library.Models.Library;
 
-namespace Library.Models.Library
+namespace Library.Models.Dto
 {
     /// <summary>
     /// Читатель
     /// </summary>
-    public class Reader : IEntity
+    public class ReaderDto
     {
         /// <summary>
         /// Идентификатор
         /// </summary>
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
 
         /// <summary>
         /// ФИО читателя
@@ -22,12 +23,5 @@ namespace Library.Models.Library
         /// Дата рождения
         /// </summary>
         public DateTime Birthday { get; set; }
-
-        /// <summary>
-        /// Дата удаления
-        /// </summary>
-        public DateTime? DeleteDateTime { get; set; }
-
-        public ICollection<Register> Registers { get; set; } = new List<Register>();
     }
 }

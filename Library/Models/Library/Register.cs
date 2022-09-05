@@ -5,7 +5,7 @@ namespace Library.Models.Library
     /// <summary>
     /// Журнал учета книг
     /// </summary>
-    public class Register
+    public class Register : IEntity
     {
         /// <summary>
         /// Идентификатор

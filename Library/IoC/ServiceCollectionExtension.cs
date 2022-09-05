@@ -12,6 +12,9 @@ namespace Library.IoC
             return serviceCollection
                     .AddScoped<IBookService, BookService>()
                     .AddScoped<IBookRepository, BookRepository>()
+                    .AddScoped<IReaderService, ReaderService>()
+                    .AddScoped<IReaderRepository, ReaderRepository>()
+                    .AddScoped<IRegisterRepository, RegisterRepository>()
                     .AddAutoMapper(typeof(MappingProfile));
         }
     }
